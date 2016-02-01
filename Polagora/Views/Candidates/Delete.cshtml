@@ -1,0 +1,120 @@
+﻿@model Polagora.Models.Candidate
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Candidate</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TwitterID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TwitterID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacebookID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacebookID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Party)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Party)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TwitterURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TwitterURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacebookURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacebookURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CampaignURL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CampaignURL)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacebookCoverPhoto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacebookCoverPhoto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TwitterProfilePic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TwitterProfilePic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TwitterFollowers)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TwitterFollowers)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FacebookLikes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FacebookLikes)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>
