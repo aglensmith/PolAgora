@@ -299,7 +299,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ApiCaller\ApiCaller\ApiCaller.csproj">
+    <ProjectReference Include="..\ApiCaller\ApiCaller\ApiCaller.csproj">
       <Project>{9a881ba1-0b83-43f4-8705-f58536ea5ede}</Project>
       <Name>ApiCaller</Name>
     </ProjectReference>
