@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polagora", "Polagora\Polago
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polagora.Tests", "Polagora.Tests\Polagora.Tests.csproj", "{FC9A640B-E78F-4000-8286-C8F4B5B0FF57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiCaller", "ApiCaller\ApiCaller\ApiCaller.csproj", "{9A881BA1-0B83-43F4-8705-F58536EA5EDE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiCaller", "Polagora\ApiCaller\ApiCaller\ApiCaller.csproj", "{9A881BA1-0B83-43F4-8705-F58536EA5EDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
