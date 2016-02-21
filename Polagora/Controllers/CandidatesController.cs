@@ -66,8 +66,10 @@ namespace Polagora.Controllers
         {
             if (db.Candidates.ToList().Count > 0)
             {
-                DBUpdater Updater = new DBUpdater();
-                await Updater.Update(db);
+                //add handling for System.ComponentModel.Win32Exception: The wait operation timed out
+
+                //DBUpdater Updater = new DBUpdater();
+                //await Updater.Update(db);
             }
             //DBUpdater Updater = new DBUpdater();
             //await Updater.Update(db);
