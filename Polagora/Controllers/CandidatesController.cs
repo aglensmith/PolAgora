@@ -17,7 +17,7 @@ namespace Polagora.Controllers
     {
         private PolagoraContext db = new PolagoraContext();
 
-        public async Task Update()
+        public async Task Update(PolagoraContext db)
         {
             List<Candidate> Candidates = db.Candidates.ToList();
             List<string> TwitterIDs = new List<string>();
@@ -42,9 +42,6 @@ namespace Polagora.Controllers
             Dictionary<string, FacebookCaller.FacebookResponse> FacebookResponses =
                 await FacebookCaller.CallFacebookAsync(FacebookIDs, FacebookToken);
 
-            Debug.WriteLine(FacebookIDs[0]);
-            Debug.WriteLine(FacebookResponses[FacebookIDs[0]]);
-
             foreach (TwitterCaller.TwitterResponse Response in TwitterResponses)
             {
                 Candidate Candidate = (from c in db.Candidates where c.TwitterID == Response.id_str select c).FirstOrDefault();
@@ -53,14 +50,19 @@ namespace Polagora.Controllers
 
             foreach (KeyValuePair<string, FacebookCaller.FacebookResponse> Response in FacebookResponses)
             {
-                Candidate Candidate = (from c in db.Candidates where c.FacebookID == Response.Key select c).FirstOrDefault();
-                Candidate.FacebookLikes = Response.Value.likes;
+                string id = Response.Value.id;
+                Candidate Candidate = (from c in db.Candidates where c.FacebookID == id select c).FirstOrDefault();
+
+                if (Candidate != null)
+                {
+                    Candidate.FacebookLikes = Response.Value.likes;
+                }
+
             }
 
             db.SaveChanges();
 
         }
-
         // GET: Candidates
         public async Task<ActionResult> Index()
         {
@@ -68,8 +70,8 @@ namespace Polagora.Controllers
             {
                 //add handling for System.ComponentModel.Win32Exception: The wait operation timed out
 
-                //DBUpdater Updater = new DBUpdater();
-                //await Updater.Update(db);
+                DBUpdater Updater = new DBUpdater();
+                await Updater.Update(db);
             }
             //DBUpdater Updater = new DBUpdater();
             //await Updater.Update(db);
@@ -92,6 +94,7 @@ namespace Polagora.Controllers
         }
 
         // GET: Candidates/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -101,6 +104,7 @@ namespace Polagora.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,TwitterID,FacebookID,LastName,FirstName,Party,TwitterURL,FacebookURL,CampaignURL,FacebookCoverPhoto,TwitterProfilePic,TwitterFollowers,FacebookLikes")] Candidate candidate)
         {
@@ -115,6 +119,7 @@ namespace Polagora.Controllers
         }
 
         // GET: Candidates/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -133,6 +138,7 @@ namespace Polagora.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ID,TwitterID,FacebookID,LastName,FirstName,Party,TwitterURL,FacebookURL,CampaignURL,FacebookCoverPhoto,TwitterProfilePic,TwitterFollowers,FacebookLikes")] Candidate candidate)
         {
@@ -146,6 +152,7 @@ namespace Polagora.Controllers
         }
 
         // GET: Candidates/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -161,6 +168,7 @@ namespace Polagora.Controllers
         }
 
         // POST: Candidates/Delete/5
+        [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

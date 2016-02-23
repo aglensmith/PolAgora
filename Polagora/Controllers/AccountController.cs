@@ -136,6 +136,7 @@ namespace Polagora.Controllers
 
         //
         // GET: /Account/Register
+        [Authorize]
         [AllowAnonymous]
         public ActionResult Register()
         {
@@ -145,6 +146,7 @@ namespace Polagora.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
+        [Authorize]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)

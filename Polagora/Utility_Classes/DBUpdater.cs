@@ -44,11 +44,17 @@ namespace Polagora.UtilityClasses
                 Candidate Candidate = (from c in db.Candidates where c.TwitterID == Response.id_str select c).FirstOrDefault();
                 Candidate.TwitterFollowers = Response.followers_count;
             }
-
+            
             foreach (KeyValuePair<string, FacebookCaller.FacebookResponse> Response in FacebookResponses)
             {
-                Candidate Candidate = (from c in db.Candidates where c.FacebookID == Response.Key select c).FirstOrDefault();
-                Candidate.FacebookLikes = Response.Value.likes;
+                string id = Response.Value.id;
+                Candidate Candidate = (from c in db.Candidates where c.FacebookID == id select c).FirstOrDefault();
+
+                if (Candidate != null)
+                {
+                    Candidate.FacebookLikes = Response.Value.likes;
+                }
+                
             }
 
             db.SaveChanges();
