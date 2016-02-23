@@ -63,6 +63,7 @@ namespace Polagora.Controllers
             db.SaveChanges();
 
         }
+       
         // GET: Candidates
         public async Task<ActionResult> Index()
         {
@@ -70,11 +71,14 @@ namespace Polagora.Controllers
             {
                 //add handling for System.ComponentModel.Win32Exception: The wait operation timed out
 
+                Debug.WriteLine("Running Updater...");
+
                 DBUpdater Updater = new DBUpdater();
                 await Updater.Update(db);
+
+                Debug.WriteLine("Done Updating");
             }
-            //DBUpdater Updater = new DBUpdater();
-            //await Updater.Update(db);
+
             return View(db.Candidates.ToList());
         }
 

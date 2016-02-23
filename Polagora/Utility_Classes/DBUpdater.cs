@@ -49,12 +49,12 @@ namespace Polagora.UtilityClasses
             {
                 string id = Response.Value.id;
                 Candidate Candidate = (from c in db.Candidates where c.FacebookID == id select c).FirstOrDefault();
-
-                if (Candidate != null)
-                {
-                    Candidate.FacebookLikes = Response.Value.likes;
-                }
-                
+                Debug.WriteLine("ID: " + id);
+                Debug.WriteLine("Candidate: " + Candidate);
+                Debug.WriteLine("Response: " + Response);
+                Debug.WriteLine(Response.Value.likes);
+                Candidate.FacebookLikes = Response.Value.likes;
+                  
             }
 
             db.SaveChanges();
