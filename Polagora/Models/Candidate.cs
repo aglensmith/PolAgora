@@ -17,10 +17,10 @@ namespace Polagora.Models
         public string TwitterID { get; set; }
         public string FacebookID { get; set; }
 
-        [Display(Name = "First Name")]
+        [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Display(Name = "Last Name")]
+        [Display(Name = "First Name")]
         public string FirstName { get; set; }
 
         public string Party { get; set; }
@@ -33,9 +33,11 @@ namespace Polagora.Models
         public string TwitterProfilePic { get; set; }
 
         [Display(Name = "Twitter Followers")]
+        [DisplayFormat(DataFormatString = "{0:N0}")]
         public int TwitterFollowers { get; set; }
 
         [Display(Name = "Facebook Likes")]
+        [DisplayFormat(DataFormatString = "{0:N0}")]
         public int FacebookLikes { get; set; }
 
 

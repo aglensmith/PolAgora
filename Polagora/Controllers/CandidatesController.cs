@@ -65,6 +65,7 @@ namespace Polagora.Controllers
         }
        
         // GET: Candidates
+        [OutputCache (Duration = 5, VaryByParam ="none")]
         public async Task<ActionResult> Index()
         {
             if (db.Candidates.ToList().Count > 0)
