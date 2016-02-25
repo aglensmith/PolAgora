@@ -22,3 +22,11 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.Republican {
+    background-color: #ffe6e6;
+}
+
+.Democratic {
+    background-color: #d6d6f5;
+}
