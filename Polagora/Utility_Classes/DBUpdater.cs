@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Linq;
-using System.Net;
 using System.Web.Configuration;
-using System.Web.Mvc;
 using Polagora.Models;
 using ApiCaller;
 using System.Threading.Tasks;
