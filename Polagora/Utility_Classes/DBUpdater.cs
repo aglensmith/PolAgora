@@ -5,7 +5,8 @@ using System.Web.Configuration;
 using Polagora.Models;
 using ApiCaller;
 using System.Threading.Tasks;
-using System.Diagnostics;
+
+
 namespace Polagora.UtilityClasses
 {
     public class DBUpdater
@@ -26,7 +27,6 @@ namespace Polagora.UtilityClasses
                 {
                     FacebookIDs.Add(Candidate.FacebookID);
                 }
-
             }
 
             List<TwitterCaller.TwitterResponse> TwitterResponses =
@@ -35,6 +35,8 @@ namespace Polagora.UtilityClasses
             Dictionary<string, FacebookCaller.FacebookResponse> FacebookResponses =
                 await FacebookCaller.CallFacebookAsync(FacebookIDs, FacebookToken);
 
+
+            //Split this into another class/method to seperate the calls and DB work
             foreach (TwitterCaller.TwitterResponse Response in TwitterResponses)
             {
                 Candidate Candidate = (from c in db.Candidates where c.TwitterID == Response.id_str select c).FirstOrDefault();
@@ -45,12 +47,7 @@ namespace Polagora.UtilityClasses
             {
                 string id = Response.Value.id;
                 Candidate Candidate = (from c in db.Candidates where c.FacebookID == id select c).FirstOrDefault();
-                Debug.WriteLine("ID: " + id);
-                Debug.WriteLine("Candidate: " + Candidate);
-                Debug.WriteLine("Response: " + Response);
-                Debug.WriteLine(Response.Value.likes);
-                Candidate.FacebookLikes = Response.Value.likes;
-                  
+                Candidate.FacebookLikes = Response.Value.likes;                 
             }
 
             db.SaveChanges();
