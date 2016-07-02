@@ -10,6 +10,7 @@ namespace ApiCaller
     public class FacebookCaller : Caller
 
     {
+		//Calls facebook and returns like counts for specified facebookIDs
         public static async Task<Dictionary<string, FacebookResponse>> 
             CallFacebookAsync(List<string> FacebookIDs, string Token)
         {
@@ -21,14 +22,9 @@ namespace ApiCaller
 
                 string url = uri + IDs + param + Token;
 
-                Debug.WriteLine(url);
-
                 //GET
                 var response = await client.GetAsync(url);
                 var payload = await response.Content.ReadAsStringAsync();
-
-                Debug.WriteLine(response);
-                Debug.WriteLine(payload);
 
                 //Deserialize
                 JavaScriptSerializer Serializer = new JavaScriptSerializer();

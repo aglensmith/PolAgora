@@ -9,6 +9,7 @@ namespace ApiCaller
 {
     public class TwitterCaller : Caller
     {
+        //Calls twitter and returns list of twitter response objects with follower counts
         public static async Task<List<TwitterResponse>> CallTwitterAsync(List<string> twitterIDs, string Token)
         {
             string BearerToken = "Bearer " + Token;
@@ -50,6 +51,7 @@ namespace ApiCaller
             public string id_str { get; set; }
         }
 
+        //Gets bearer token from Twitter -- needed for OAuth
         public string GetBearer(string ConsumerKey, string ConsumerSecret)
         {
             //GetBearerAsync(ConsumerKey, ConsumerSecret).Wait();
@@ -61,7 +63,7 @@ namespace ApiCaller
 
             return Response.access_token;
         }
-
+				
         static async Task<string> GetBearerAsync(string ApiKey, string ApiSecret)
         {
             using (var client = new HttpClient())

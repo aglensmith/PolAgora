@@ -16,53 +16,6 @@ namespace Polagora.Controllers
     public class CandidatesController : Controller
     {
         private PolagoraContext db = new PolagoraContext();
-
-        public async Task Update(PolagoraContext db)
-        {
-            List<Candidate> Candidates = db.Candidates.ToList();
-            List<string> TwitterIDs = new List<string>();
-            List<string> FacebookIDs = new List<string>();
-            string TwitterToken = WebConfigurationManager.AppSettings["TwitterBearer"];
-            string FacebookToken = WebConfigurationManager.AppSettings["FacebookToken"];
-
-            foreach (Candidate Candidate in Candidates)
-            {
-                TwitterIDs.Add(Candidate.TwitterID);
-
-                if (Candidate.FacebookID != null)
-                {
-                    FacebookIDs.Add(Candidate.FacebookID);
-                }
-
-            }
-
-            List<TwitterCaller.TwitterResponse> TwitterResponses =
-                await TwitterCaller.CallTwitterAsync(TwitterIDs, TwitterToken);
-
-            Dictionary<string, FacebookCaller.FacebookResponse> FacebookResponses =
-                await FacebookCaller.CallFacebookAsync(FacebookIDs, FacebookToken);
-
-            foreach (TwitterCaller.TwitterResponse Response in TwitterResponses)
-            {
-                Candidate Candidate = (from c in db.Candidates where c.TwitterID == Response.id_str select c).FirstOrDefault();
-                Candidate.TwitterFollowers = Response.followers_count;
-            }
-
-            foreach (KeyValuePair<string, FacebookCaller.FacebookResponse> Response in FacebookResponses)
-            {
-                string id = Response.Value.id;
-                Candidate Candidate = (from c in db.Candidates where c.FacebookID == id select c).FirstOrDefault();
-
-                if (Candidate != null)
-                {
-                    Candidate.FacebookLikes = Response.Value.likes;
-                }
-
-            }
-
-            db.SaveChanges();
-
-        }
        
         // GET: Candidates
         [OutputCache (Duration = 5, VaryByParam ="none")]
@@ -71,13 +24,8 @@ namespace Polagora.Controllers
             if (db.Candidates.ToList().Count > 0)
             {
                 //add handling for System.ComponentModel.Win32Exception: The wait operation timed out
-
-                Debug.WriteLine("Running Updater...");
-
                 DBUpdater Updater = new DBUpdater();
                 await Updater.Update(db);
-
-                Debug.WriteLine("Done Updating");
             }
 
             return View(db.Candidates.ToList());

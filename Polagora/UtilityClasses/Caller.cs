@@ -4,6 +4,7 @@ namespace ApiCaller
 {
     public class Caller
     {
+		//For encoding API tokens
         public static string Base64Encode(string stringText)
         {
             var stringTextBytes = Encoding.UTF8.GetBytes(stringText);

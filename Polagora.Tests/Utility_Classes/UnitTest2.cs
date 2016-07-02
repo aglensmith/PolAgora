@@ -1,6 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Web.Configuration;
+using Polagora.UtilityClasses;
+using System.Collections.Generic;
+using System.Data;
 
 namespace Polagora.Tests.Utility_Classes
 {
@@ -10,12 +13,12 @@ namespace Polagora.Tests.Utility_Classes
         [TestMethod]
         public void TestMethod1()
         {
-            //string TwitterToken = WebConfigurationManager.AppSettings["TwitterBearer"];
-            //string FacebookToken = WebConfigurationManager.AppSettings["FacebookToken"];
-           // Assert.IsNotNull(TwitterToken);
-           // Assert.IsNotNull(FacebookToken);
-           // Assert.IsInstanceOfType(TwitterToken, typeof(string));
-            //Assert.IsInstanceOfType(FacebookToken, typeof(string));
+            //List<string> FacebookIDs = PropertiesToList.FacebookIDsToList();
+            //List<string> TwitterIDs = PropertiesToList.FacebookIDsToList();
+
+            //Assert.IsNotNull(FacebookIDs);
+            //Assert.IsNotNull(TwitterIDs);
+            
         }
     }
 }
