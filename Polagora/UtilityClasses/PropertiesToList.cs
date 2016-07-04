@@ -7,7 +7,7 @@ namespace Polagora.UtilityClasses
 {
     public class PropertiesToList
     {
-        //Gets candidate facebook ids from DB and returns as list
+        //returns as list of facebook IDs from a list of candidates
         public static List<string> FacebookIDsToList(List<Candidate> Candidates)
         {
             List<string> FacebookIDs = new List<string>();
@@ -23,7 +23,7 @@ namespace Polagora.UtilityClasses
             return FacebookIDs;
         }
 
-        //gets candidate twitter ids from DB and returns as list
+        //returns a list of twitter ids from a list of candidates
         public static List<string> TwitterIDsTolist(List<Candidate> Candidates)
         {
             List<string> TwitterIDs = new List<string>();
