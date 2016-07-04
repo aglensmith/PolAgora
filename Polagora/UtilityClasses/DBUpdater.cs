@@ -42,23 +42,12 @@ namespace Polagora.UtilityClasses
             //Get candidates from DB
             List<Candidate> Candidates = db.Candidates.ToList();
 
-            List<string> TwitterIDs = new List<string>();
-            List<string> FacebookIDs = new List<string>();
+            List<string> TwitterIDs = PropertiesToList.TwitterIDsTolist(Candidates);
+            List<string> FacebookIDs = PropertiesToList.FacebookIDsToList(Candidates);
 
             //Get tokens from app settings
             string TwitterToken = WebConfigurationManager.AppSettings["TwitterBearer"];
             string FacebookToken = WebConfigurationManager.AppSettings["FacebookToken"];
-
-            //Builds TwitterIDs and FacebookIDs List
-            foreach (Candidate Candidate in Candidates)
-            {
-                TwitterIDs.Add(Candidate.TwitterID);
-
-                if (Candidate.FacebookID != null)
-                {
-                    FacebookIDs.Add(Candidate.FacebookID);
-                }
-            }
 
             //Call twitter and get newest follower count -- split into diff method
 			List<TwitterCaller.TwitterResponse> TwitterResponses =
