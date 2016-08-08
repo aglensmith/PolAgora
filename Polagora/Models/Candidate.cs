@@ -40,6 +40,6 @@ namespace Polagora.Models
         [DisplayFormat(DataFormatString = "{0:N0}")]
         public int FacebookLikes { get; set; }
 
-
+        public virtual ICollection<Snapshot> Snapshots { get; set; }
     }
 }
