@@ -231,7 +231,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UtilityClasses\Caller.cs" />
-    <Compile Include="UtilityClasses\PropertiesToList.cs" />
     <Compile Include="UtilityClasses\DBUpdater.cs" />
     <Compile Include="UtilityClasses\FacebookCaller.cs" />
     <Compile Include="UtilityClasses\TwitterCaller.cs" />
