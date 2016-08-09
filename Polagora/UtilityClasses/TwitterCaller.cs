@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Configuration;
+using System.Linq;
 
 namespace ApiCaller
 {
     public class TwitterCaller : Caller
     {
         //Calls twitter and returns list of twitter response objects with follower counts
-        public static async Task<List<TwitterResponse>> CallTwitterAsync(List<string> twitterIDs, string Token)
+        public static async Task<Dictionary<string, TwitterResponse>> CallTwitterAsync(List<string> twitterIDs, string Token)
         {
             string BearerToken = "Bearer " + Token;
 
@@ -20,7 +21,7 @@ namespace ApiCaller
 
             using (var client = new HttpClient())
             {    
-                //TryAdd... skips validation that can throw error false-posititve
+                //TryAdd: skips validation that can throw error false-posititve
                 client.DefaultRequestHeaders.TryAddWithoutValidation("Authorization", BearerToken);
                 client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "polagora");
 
@@ -30,7 +31,10 @@ namespace ApiCaller
 
                 //Deserialize into list of Response objects
                 JavaScriptSerializer Serializer = new JavaScriptSerializer();
-                return Serializer.Deserialize<List<TwitterResponse>>(ResponseContent);
+                List<TwitterResponse> TwitterResponses = Serializer.Deserialize<List<TwitterResponse>>(ResponseContent);
+                return TwitterResponses.ToDictionary(tr => tr.id_str);
+
+                //return Serializer.Deserialize<List<TwitterResponse>>(ResponseContent);
             }
         }
 
