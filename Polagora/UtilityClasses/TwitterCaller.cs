@@ -5,14 +5,18 @@ using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Configuration;
 using System.Linq;
+using System.Web.Configuration;
 
 namespace ApiCaller
 {
     public class TwitterCaller : Caller
     {
         //Calls twitter and returns list of twitter response objects with follower counts
-        public static async Task<Dictionary<string, TwitterResponse>> CallTwitterAsync(List<string> twitterIDs, string Token)
+        public static async Task<Dictionary<string, TwitterResponse>> CallTwitterAsync(List<string> twitterIDs)
         {
+            //Get token from app settings
+            string Token = WebConfigurationManager.AppSettings["TwitterBearer"];
+
             string BearerToken = "Bearer " + Token;
 
             string IDs = string.Join(",", twitterIDs);

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Diagnostics;
+using System.Web.Configuration;
 
 namespace ApiCaller
 {
@@ -12,14 +13,14 @@ namespace ApiCaller
     {
 		//Calls facebook and returns like counts for specified facebookIDs
         public static async Task<Dictionary<string, FacebookResponse>> 
-            CallFacebookAsync(List<string> FacebookIDs, string Token)
+            CallFacebookAsync(List<string> FacebookIDs)
         {
             using (var client = new HttpClient())
             {
                 string uri = "https://graph.facebook.com/v2.5/?ids=";
                 string IDs = string.Join(",", FacebookIDs);
                 string param = "&fields=likes&access_token=";
-
+                string Token = WebConfigurationManager.AppSettings["FacebookToken"];
                 string url = uri + IDs + param + Token;
 
                 //GET
