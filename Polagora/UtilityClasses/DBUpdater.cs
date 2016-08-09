@@ -12,28 +12,6 @@ namespace Polagora.UtilityClasses
 {
     public class DBUpdater
     {
-		//Gets a list of candidate IDs from DB
-        public Tuple<List<string>, List<string>> IDsToList (PolagoraContext db)
-        {
-            List<Candidate> Candidates = db.Candidates.ToList();
-            List<string> TwitterIDs = new List<string>();
-            List<string> FacebookIDs = new List<string>();
-            
-            foreach (Candidate Candidate in Candidates)
-            {
-                if (Candidate.TwitterID != null)
-                {
-                    TwitterIDs.Add(Candidate.TwitterID);
-                }          
-
-                if (Candidate.FacebookID != null)
-                {
-                    FacebookIDs.Add(Candidate.FacebookID);
-                }
-            }
-
-            return Tuple.Create(FacebookIDs, TwitterIDs);
-        }
 
         //Gets follower and like count from facbook and twitter, then updates DB
         public async Task Update(PolagoraContext db)
@@ -75,5 +53,40 @@ namespace Polagora.UtilityClasses
             db.SaveChanges();
 
         }
+
+        public async Task AddSnapshot(PolagoraContext db)
+        {
+            //Get candidates from DB
+            List<Candidate> Candidates = db.Candidates.ToList();
+
+            List<string> TwitterIDs = PropertiesToList.TwitterIDsTolist(Candidates);
+            List<string> FacebookIDs = PropertiesToList.FacebookIDsToList(Candidates);
+
+            //Get tokens from app settings
+            string TwitterToken = WebConfigurationManager.AppSettings["TwitterBearer"];
+            string FacebookToken = WebConfigurationManager.AppSettings["FacebookToken"];
+
+            //Call twitter and get newest follower count -- split into diff method
+			List<TwitterCaller.TwitterResponse> TwitterResponses =
+                await TwitterCaller.CallTwitterAsync(TwitterIDs, TwitterToken);
+			
+			//Call facebook and get newest like count -- split into diff method
+            Dictionary<string, FacebookCaller.FacebookResponse> FacebookResponses =
+                await FacebookCaller.CallFacebookAsync(FacebookIDs, FacebookToken);
+
+
+            //Update the DB with the new counts
+            foreach (TwitterCaller.TwitterResponse Response in TwitterResponses)
+            {
+            }
+
+            foreach (KeyValuePair<string, FacebookCaller.FacebookResponse> Response in FacebookResponses)
+            {
+            }
+
+            db.SaveChanges();
+        }
     }
+
+
 }
