@@ -94,6 +94,7 @@ namespace Polagora.Controllers
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
+        [Authorize]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
             // Require that the user has already logged in via username/password or external login
@@ -109,6 +110,7 @@ namespace Polagora.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
         {
             if (!ModelState.IsValid)
@@ -137,7 +139,7 @@ namespace Polagora.Controllers
         //
         // GET: /Account/Register
 
-        //[AllowAnonymous]
+        [AllowAnonymous]
         [Authorize]
         public ActionResult Register()
         {
@@ -145,10 +147,10 @@ namespace Polagora.Controllers
         }
 
         // POST: /Account/Register
-        //[AllowAnonymous]
+        [AllowAnonymous]
         [HttpPost]
-        [Authorize]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -177,6 +179,7 @@ namespace Polagora.Controllers
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
+        [Authorize]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)
@@ -190,6 +193,7 @@ namespace Polagora.Controllers
         //
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
+        [Authorize]
         public ActionResult ForgotPassword()
         {
             return View();
@@ -200,6 +204,7 @@ namespace Polagora.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
             if (ModelState.IsValid)
@@ -226,6 +231,7 @@ namespace Polagora.Controllers
         //
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
+        [Authorize]
         public ActionResult ForgotPasswordConfirmation()
         {
             return View();
@@ -234,6 +240,7 @@ namespace Polagora.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
+        [Authorize]
         public ActionResult ResetPassword(string code)
         {
             return code == null ? View("Error") : View();
@@ -244,6 +251,7 @@ namespace Polagora.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
@@ -268,6 +276,7 @@ namespace Polagora.Controllers
         //
         // GET: /Account/ResetPasswordConfirmation
         [AllowAnonymous]
+        [Authorize]
         public ActionResult ResetPasswordConfirmation()
         {
             return View();
@@ -287,6 +296,7 @@ namespace Polagora.Controllers
         //
         // GET: /Account/SendCode
         [AllowAnonymous]
+        [Authorize]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
             var userId = await SignInManager.GetVerifiedUserIdAsync();
@@ -304,6 +314,7 @@ namespace Polagora.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> SendCode(SendCodeViewModel model)
         {
             if (!ModelState.IsValid)

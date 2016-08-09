@@ -20,5 +20,6 @@ namespace Polagora.Models
         }
 
         public System.Data.Entity.DbSet<Polagora.Models.Candidate> Candidates { get; set; }
+        public System.Data.Entity.DbSet<Polagora.Models.Snapshot> Snapshots { get; set; }
     }
 }
