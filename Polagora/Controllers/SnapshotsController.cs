@@ -10,6 +10,7 @@ namespace Polagora.Controllers
     public class SnapshotsController : ApiController
     {
         // GET api/<controller>
+        [Authorize]
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
