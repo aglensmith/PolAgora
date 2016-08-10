@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Polagora.UtilityClasses;
 using Polagora.Models;
 
@@ -12,6 +8,16 @@ namespace SnapshotWorker
     {
         static void Main(string[] args)
         {
+
+        }
+
+        static async void doStuff()
+        {
+            PolagoraContext db = new PolagoraContext();
+            
+            //add handling for System.ComponentModel.Win32Exception: The wait operation timed out
+            DBUpdater Updater = new DBUpdater();
+            await Updater.Update(db);
         }
     }
 }
