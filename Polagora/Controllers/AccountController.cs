@@ -12,7 +12,7 @@ using Polagora.Models;
 
 namespace Polagora.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
