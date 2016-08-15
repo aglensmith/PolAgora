@@ -12,7 +12,7 @@ using Polagora.Models;
 
 namespace Polagora.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -138,7 +138,7 @@ namespace Polagora.Controllers
         // GET: /Account/Register
 
         //[AllowAnonymous]
-        //[Authorize]
+        [Authorize]
         public ActionResult Register()
         {
             return View();
@@ -147,7 +147,7 @@ namespace Polagora.Controllers
         // POST: /Account/Register
         //[AllowAnonymous]
         [HttpPost]
-        //[Authorize]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
