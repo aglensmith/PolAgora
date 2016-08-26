@@ -6,16 +6,16 @@ using System.Web.Script.Serialization;
 using System.Configuration;
 using System.Linq;
 using System.Web.Configuration;
+using System.Diagnostics;
 
 namespace ApiCaller
 {
     public class TwitterCaller : Caller
     {
         //Calls twitter and returns list of twitter response objects with follower counts
-        public static async Task<Dictionary<string, TwitterResponse>> CallTwitterAsync(List<string> twitterIDs)
+        public static async Task<Dictionary<string, TwitterResponse>> CallTwitterAsync(List<string> twitterIDs, string Token)
         {
-            //Get token from app settings
-            string Token = WebConfigurationManager.AppSettings["TwitterBearer"];
+            Debug.WriteLine("Calling twitter...");
 
             string BearerToken = "Bearer " + Token;
 
@@ -36,6 +36,7 @@ namespace ApiCaller
                 //Deserialize into list of Response objects
                 JavaScriptSerializer Serializer = new JavaScriptSerializer();
                 List<TwitterResponse> TwitterResponses = Serializer.Deserialize<List<TwitterResponse>>(ResponseContent);
+
                 return TwitterResponses.ToDictionary(tr => tr.id_str);
 
                 //return Serializer.Deserialize<List<TwitterResponse>>(ResponseContent);

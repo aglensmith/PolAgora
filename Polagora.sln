@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polagora", "Polagora\Polago
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Polagora.Tests", "Polagora.Tests\Polagora.Tests.csproj", "{FC9A640B-E78F-4000-8286-C8F4B5B0FF57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SnapshotWorker", "SnapshotWorker\SnapshotWorker.csproj", "{B6E993DD-17BF-4242-B1DF-9D106115834C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PolagoraWebJob", "PolagoraWebJob\PolagoraWebJob.csproj", "{A9D5750C-F480-481C-BE77-70A148BC59AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{FC9A640B-E78F-4000-8286-C8F4B5B0FF57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC9A640B-E78F-4000-8286-C8F4B5B0FF57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC9A640B-E78F-4000-8286-C8F4B5B0FF57}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B6E993DD-17BF-4242-B1DF-9D106115834C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B6E993DD-17BF-4242-B1DF-9D106115834C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B6E993DD-17BF-4242-B1DF-9D106115834C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B6E993DD-17BF-4242-B1DF-9D106115834C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9D5750C-F480-481C-BE77-70A148BC59AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9D5750C-F480-481C-BE77-70A148BC59AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9D5750C-F480-481C-BE77-70A148BC59AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9D5750C-F480-481C-BE77-70A148BC59AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
