@@ -2,7 +2,7 @@
   "$schema": "http://schemastore.org/schemas/json/webjobs-list.json",
   "WebJobs": [
     {
-      "filePath": "../SnapshotsWebJob/SnapshotsWebJob.csproj"
+      "filePath": "../PolagoraWebJob/PolagoraWebJob.csproj"
     }
   ]
 }
