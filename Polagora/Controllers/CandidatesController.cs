@@ -19,18 +19,8 @@ namespace Polagora.Controllers
        
         // GET: Candidates
         [OutputCache (Duration = 5, VaryByParam ="none")]
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            if (db.Candidates.ToList().Count > 0)
-            {
-                //add handling for System.ComponentModel.Win32Exception: The wait operation timed out
-                DBUpdater Updater = new DBUpdater();
-
-                Updater.FacebookToken = WebConfigurationManager.AppSettings["FacebookToken"];
-                Updater.TwitterToken = WebConfigurationManager.AppSettings["TwitterBearer"];
-                await Updater.Update(db);
-            }
-
             return View(db.Candidates.ToList());
         }
 

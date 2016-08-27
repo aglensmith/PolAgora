@@ -27,13 +27,20 @@ namespace PolagoraWebJob
         static async Task MainAsync()
         {
             //add try catch
-            PolagoraContext DBContext = new PolagoraContext();
-            DBUpdater Updater = new DBUpdater();
+            SnapshotManager SnapshotManager = new SnapshotManager() { DBContext = new PolagoraContext() };
 
-            Updater.FacebookToken = ConfigurationManager.AppSettings["FacebookToken"];
-            Updater.TwitterToken = ConfigurationManager.AppSettings["TwitterBearer"];
+            //Call Twitter and Facebook
+            string FacebookToken = ConfigurationManager.AppSettings["FacebookToken"];
+            string TwitterToken = ConfigurationManager.AppSettings["TwitterBearer"];
 
-            await Updater.Update(DBContext);
+            Dictionary<string, FacebookCaller.FacebookResponse> 
+                FacebookResponses = await FacebookCaller.CallFacebookAsync(SnapshotManager.FacebookIDs, FacebookToken);
+
+            Dictionary<string, TwitterCaller.TwitterResponse> 
+                TwitterResponses = await TwitterCaller.CallTwitterAsync(SnapshotManager.TwitterIDs, TwitterToken);
+
+            //Insert Snapshots into DB
+            SnapshotManager.InsertSnapshots(FacebookResponses, TwitterResponses);
         }
 
     }
