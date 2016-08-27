@@ -3,8 +3,6 @@ using System.Net.Http;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
-using System.Diagnostics;
-using System.Web.Configuration;
 
 namespace ApiCaller
 {

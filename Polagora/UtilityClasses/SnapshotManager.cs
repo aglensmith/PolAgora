@@ -1,12 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Web.Configuration;
 using Polagora.Models;
 using ApiCaller;
-using System.Threading.Tasks;
 using System;
-using System.Diagnostics;
 
 
 namespace Polagora.UtilityClasses
@@ -20,6 +17,7 @@ namespace Polagora.UtilityClasses
         public List<string> TwitterIDs { get; set; }
 
         private PolagoraContext _dbcontext;
+
         public PolagoraContext DBContext
         {
             get

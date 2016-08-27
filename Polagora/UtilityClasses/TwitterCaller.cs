@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using System.Configuration;
 using System.Linq;
-using System.Web.Configuration;
 using System.Diagnostics;
 
 namespace ApiCaller
