@@ -1,9 +1,0 @@
-﻿{
-  "$schema": "http://schemastore.org/schemas/json/webjob-publish-settings.json",
-  "webJobName": "SnapshotsWebJob",
-  "startTime": "2016-08-15T00:00:00-08:00",
-  "endTime": null,
-  "jobRecurrenceFrequency": "Minute",
-  "interval": 1,
-  "runMode": "Scheduled"
-}
