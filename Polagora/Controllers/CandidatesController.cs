@@ -25,6 +25,9 @@ namespace Polagora.Controllers
             {
                 //add handling for System.ComponentModel.Win32Exception: The wait operation timed out
                 DBUpdater Updater = new DBUpdater();
+
+                Updater.FacebookToken = WebConfigurationManager.AppSettings["FacebookToken"];
+                Updater.TwitterToken = WebConfigurationManager.AppSettings["TwitterBearer"];
                 await Updater.Update(db);
             }
 

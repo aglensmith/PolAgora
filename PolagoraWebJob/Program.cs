@@ -17,49 +17,6 @@ using System.Configuration;
 
 namespace PolagoraWebJob
 {
-    public class DBUpdater
-    {
-        //Gets followers & likes, updates candidate fields, creates new snapshots
-        public async Task Update(PolagoraContext db)
-        {
-            //Tokens
-            string FacebookToken = ConfigurationManager.AppSettings["FacebookToken"];
-            string TwitterToken = ConfigurationManager.AppSettings["TwitterBearer"];
-
-            //Get candidates from DB
-            Debug.WriteLine("Starting Update...");
-            List<Candidate> Candidates = db.Candidates.ToList();
-
-            List<string> TwitterIDs = Candidates.Select(c => c.TwitterID).ToList();
-            List<string> FacebookIDs = Candidates.Select(c => c.FacebookID).ToList();
-
-            //Call facebook and twitter
-            Dictionary<string, FacebookCaller.FacebookResponse> FacebookResponses =
-                await FacebookCaller.CallFacebookAsync(FacebookIDs, FacebookToken);
-
-            Dictionary<string, TwitterCaller.TwitterResponse> TwitterResponses =
-                await TwitterCaller.CallTwitterAsync(TwitterIDs, TwitterToken);
-
-            //Update the DB with the new counts
-            DateTime CallTime = DateTime.UtcNow;
-            foreach (Candidate candidate in Candidates)
-            {
-                db.Snapshots.Add(new Snapshot
-                {
-                    CandidateID = candidate.ID,
-                    Time = CallTime,
-                    FacebookLikes = FacebookResponses[candidate.FacebookID.ToString()].likes,
-                    TwitterFollowers = TwitterResponses[candidate.TwitterID.ToString()].followers_count
-                });
-
-                candidate.FacebookLikes = FacebookResponses[candidate.FacebookID.ToString()].likes;
-                candidate.TwitterFollowers = TwitterResponses[candidate.TwitterID.ToString()].followers_count;
-            }
-
-            db.SaveChanges();
-        }
-    }
-}
     class Program
     {
         static void Main(string[] args)
@@ -69,27 +26,15 @@ namespace PolagoraWebJob
 
         static async Task MainAsync()
         {
-
             //add try catch
-            PolagoraContext dbctx = new PolagoraContext();
-            await stuff(dbctx);
+            PolagoraContext DBContext = new PolagoraContext();
+            DBUpdater Updater = new DBUpdater();
+
+            Updater.FacebookToken = ConfigurationManager.AppSettings["FacebookToken"];
+            Updater.TwitterToken = ConfigurationManager.AppSettings["TwitterBearer"];
+
+            await Updater.Update(DBContext);
         }
 
-        static async Task stuff(PolagoraContext db)
-        {
-            Console.WriteLine("updating...");
-            Debug.WriteLine("Updating...");
-
-            var x = db.Candidates.ToList();
-
-            foreach (Candidate candidate in x)
-            {
-                Debug.WriteLine("Candidate: {0}", candidate.FirstName);
-            }
-
-            PolagoraWebJob.DBUpdater Updater = new PolagoraWebJob.DBUpdater();
-            await Updater.Update(db);
-            Console.WriteLine("DB updated");
-            Debug.WriteLine("Updated DB");
-        }
+    }
 }

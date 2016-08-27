@@ -13,15 +13,12 @@ namespace Polagora.UtilityClasses
 {
     public class DBUpdater
     {
-        private string FacebookToken { get; set; }
-        private string TwitterToken { get; set; }
+        public string FacebookToken { get; set; }
+        public string TwitterToken { get; set; }
+
         //Gets followers & likes, updates candidate fields, creates new snapshots
         public async Task Update(PolagoraContext db)
         {
-            //Tokens
-            string FacebookToken = WebConfigurationManager.AppSettings["FacebookToken"];
-            string TwitterToken = WebConfigurationManager.AppSettings["TwitterBearer"];
-
             //Get candidates from DB
             List<Candidate> Candidates = db.Candidates.ToList();
 
@@ -53,6 +50,8 @@ namespace Polagora.UtilityClasses
             
             db.SaveChanges();
         }
+        
+
     }
 
 
