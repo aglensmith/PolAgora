@@ -22,15 +22,6 @@ namespace Polagora
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            if (true)
-            {
-                var configuration = new Migrations.Configuration();
-                string ConnectionString = ConfigurationManager.AppSettings["AzureConnectionString"];
-                configuration.TargetDatabase = new DbConnectionInfo(ConnectionString, "System.Data.SqlClient");
-
-                var migrator = new DbMigrator(configuration);
-                migrator.Update("201608281732205_Initial");
-            }
         }
     }
 }
