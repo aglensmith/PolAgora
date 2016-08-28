@@ -22,7 +22,7 @@ namespace Polagora
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            if (false)
+            if (true)
             {
                 var configuration = new Migrations.Configuration();
                 string ConnectionString = ConfigurationManager.AppSettings["AzureConnectionString"];
