@@ -29,7 +29,7 @@ namespace Polagora
                 configuration.TargetDatabase = new DbConnectionInfo(ConnectionString, "System.Data.SqlClient");
 
                 var migrator = new DbMigrator(configuration);
-                migrator.Update();
+                migrator.Update("201608281732205_Initial");
             }
         }
     }
