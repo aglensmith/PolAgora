@@ -6,6 +6,9 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Migrations;
+using System.Configuration;
 
 namespace Polagora
 {
@@ -18,6 +21,18 @@ namespace Polagora
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            var MigrateTrue = bool.Parse(ConfigurationManager.AppSettings["MigrateToLatestVersion"]);
+
+            if(MigrateTrue)
+            {
+                var configuration = new Migrations.Configuration();
+                string ConnectionString = ConfigurationManager.AppSettings["AzureConnectionString"];
+                configuration.TargetDatabase = new DbConnectionInfo(ConnectionString, "System.Data.SqlClient");
+
+                var migrator = new DbMigrator(configuration);
+                migrator.Update();
+            }
         }
     }
 }
