@@ -22,17 +22,17 @@ namespace Polagora
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-            var MigrateTrue = bool.Parse(ConfigurationManager.AppSettings["MigrateToLatestVersion"]);
+            //var MigrateTrue = bool.Parse(ConfigurationManager.AppSettings["MigrateToLatestVersion"]);
 
-            if(MigrateTrue)
-            {
-                var configuration = new Migrations.Configuration();
-                string ConnectionString = ConfigurationManager.AppSettings["AzureConnectionString"];
-                configuration.TargetDatabase = new DbConnectionInfo(ConnectionString, "System.Data.SqlClient");
+            //if(MigrateTrue)
+            //{
+            //    var configuration = new Migrations.Configuration();
+            //    string ConnectionString = ConfigurationManager.AppSettings["AzureConnectionString"];
+            //    configuration.TargetDatabase = new DbConnectionInfo(ConnectionString, "System.Data.SqlClient");
 
-                var migrator = new DbMigrator(configuration);
-                migrator.Update("201608081723415_AddSnapshots");
-            }
+            //    var migrator = new DbMigrator(configuration);
+            //    migrator.Update("201608081723415_AddSnapshots");
+            //}
         }
     }
 }
