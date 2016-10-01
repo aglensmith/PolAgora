@@ -12,12 +12,7 @@ namespace PolagoraWebJob
     {
         static void Main(string[] args)
         {
-            var timer = new System.Threading.Timer(
-                e => MainAsync().Wait(),
-                null,
-                0,
-                TimeSpanMinutesConverter(5),
-                TimeSpanMinutesConverter
+            MainAsync().Wait();
         }
 
         static async Task MainAsync()

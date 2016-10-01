@@ -9,7 +9,7 @@ namespace Polagora.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             ContextKey = "Polagora.Models.PolagoraContext";
         }
 

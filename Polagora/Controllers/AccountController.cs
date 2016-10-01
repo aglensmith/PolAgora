@@ -12,7 +12,7 @@ using Polagora.Models;
 
 namespace Polagora.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -94,7 +94,7 @@ namespace Polagora.Controllers
         //
         // GET: /Account/VerifyCode
         [AllowAnonymous]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult> VerifyCode(string provider, string returnUrl, bool rememberMe)
         {
             // Require that the user has already logged in via username/password or external login
@@ -110,7 +110,7 @@ namespace Polagora.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult> VerifyCode(VerifyCodeViewModel model)
         {
             if (!ModelState.IsValid)
@@ -140,7 +140,7 @@ namespace Polagora.Controllers
         // GET: /Account/Register
 
         [AllowAnonymous]
-        [Authorize]
+        //[Authorize]
         public ActionResult Register()
         {
             return View();
@@ -150,7 +150,7 @@ namespace Polagora.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
@@ -179,7 +179,7 @@ namespace Polagora.Controllers
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult> ConfirmEmail(string userId, string code)
         {
             if (userId == null || code == null)
@@ -193,7 +193,7 @@ namespace Polagora.Controllers
         //
         // GET: /Account/ForgotPassword
         [AllowAnonymous]
-        [Authorize]
+        //[Authorize]
         public ActionResult ForgotPassword()
         {
             return View();
@@ -204,7 +204,7 @@ namespace Polagora.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult> ForgotPassword(ForgotPasswordViewModel model)
         {
             if (ModelState.IsValid)
@@ -231,7 +231,7 @@ namespace Polagora.Controllers
         //
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]
-        [Authorize]
+        //[Authorize]
         public ActionResult ForgotPasswordConfirmation()
         {
             return View();
@@ -240,7 +240,7 @@ namespace Polagora.Controllers
         //
         // GET: /Account/ResetPassword
         [AllowAnonymous]
-        [Authorize]
+        //[Authorize]
         public ActionResult ResetPassword(string code)
         {
             return code == null ? View("Error") : View();
@@ -251,7 +251,7 @@ namespace Polagora.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult> ResetPassword(ResetPasswordViewModel model)
         {
             if (!ModelState.IsValid)
@@ -276,7 +276,7 @@ namespace Polagora.Controllers
         //
         // GET: /Account/ResetPasswordConfirmation
         [AllowAnonymous]
-        [Authorize]
+        //[Authorize]
         public ActionResult ResetPasswordConfirmation()
         {
             return View();
@@ -296,7 +296,7 @@ namespace Polagora.Controllers
         //
         // GET: /Account/SendCode
         [AllowAnonymous]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
             var userId = await SignInManager.GetVerifiedUserIdAsync();
@@ -314,7 +314,7 @@ namespace Polagora.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        [Authorize]
+        //[Authorize]
         public async Task<ActionResult> SendCode(SendCodeViewModel model)
         {
             if (!ModelState.IsValid)
